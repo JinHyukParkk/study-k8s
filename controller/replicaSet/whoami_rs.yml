@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+ name: whoami-web
+spec:
+  replicas: 1 # Number of replicas
+  selector: # Label selector
+    matchLabels:
+      app: whoami-web
+  template: # Pod template
+    metadata:
+      labels:
+        app: whoami-web
+    spec:
+      containers:
+      - name: whoami-web
+        image: containous/whoami
+        ports:
+        - containerPort: 80

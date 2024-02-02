@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-pi # Deployment name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-pi
+  template:
+    metadata:
+      labels:
+        app: web-pi # Pod label는 Deployment의 selector와 일치해야 함
+    spec:
+      containers:
+      - name: web-pi
+        image: kubetm/web-pi
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: cm-dev
+        - secretRef:
+            name: sec-dev
+```
