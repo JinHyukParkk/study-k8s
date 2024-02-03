@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-readiness-exec1
+  labels:
+    app: readiness  
+spec:
+  containers:
+  - name: readiness
+    image: kubetm/app
+    ports:
+    - containerPort: 8080	
+    readinessProbe:
+      exec:
+        command: ["cat", "/readiness/ready.txt"]
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 3
+    volumeMounts:
+    - name: host-path
+      mountPath: /readiness
+  volumes:
+  - name : host-path
+    hostPath:
+      path: /tmp/readiness
+      type: DirectoryOrCreate
+  terminationGracePeriodSeconds: 0
+
+
+# initialDelaySeconds: 컨테이너가 시작된 후 프로브가 시작되기 전까지 대기하는 시간(초)입니다.
+# periodSeconds: 프로브가 실행되는 주기(초)입니다.
+# timeoutSeconds: 프로브가 타임아웃 되기 전까지 대기하는 시간(초)입니다.
+# successThreshold: 프로브가 성공한 것으로 간주되기 위해 연속적으로 성공해야 하는 최소 횟수입니다.
+# failureThreshold: 컨테이너가 준비되지 않은 것으로 간주되기 전에 프로브가 실패할 수 있는 최대 횟수입니다.

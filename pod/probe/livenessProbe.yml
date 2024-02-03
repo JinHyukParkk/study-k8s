@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-liveness-httpget1
+  labels:
+    app: liveness
+spec:
+  containers:
+  - name: liveness
+    image: kubetm/app
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      failureThreshold: 3
+  terminationGracePeriodSeconds: 0
+
+
+# initialDelaySeconds: 컨테이너가 시작된 후 프로브가 최초로 실행되기까지의 지연 시간(초)입니다.
+# periodSeconds: 프로브가 실행되는 주기(초)입니다.
+# timeoutSeconds: 프로브가 타임아웃 되기 전까지의 대기 시간(초)입니다.
+# successThreshold: 프로브가 성공한 것으로 간주되기 위해 연속적으로 성공해야 하는 최소 횟수입니다. livenessProbe의 경우, 이 값은 항상 1이어야 합니다.
+# failureThreshold: 컨테이너를 재시작하기 전에 프로브가 실패할 수 있는 최대 횟수입니다.
