@@ -14,3 +14,7 @@ spec:
  - name: container
    image: kubetm/app
  terminationGracePeriodSeconds: 0
+
+ # PreferredDuringSchedulingIgnoredDuringExecution: 이 규칙은 스케줄링 시 선호되는 조건을 제시하지만, 
+ # 필수 조건은 아닙니다. 즉, 시스템은 이 규칙을 가능한 만족시키려고 시도하지만, 규칙을 만족시키는 노드가 없는 경우 다른 노드에 Pod를 스케줄링할 수 있습니다. 
+ # 이를 통해 유연성을 갖고 노드 선택의 선호도를 표현할 수 있습니다.

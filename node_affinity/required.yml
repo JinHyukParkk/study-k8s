@@ -13,3 +13,7 @@ spec:
  - name: container
    image: kubetm/app
  terminationGracePeriodSeconds: 0
+
+
+# RequiredDuringSchedulingIgnoredDuringExecution: 이 규칙은 스케줄링 시 반드시 만족해야 하며, 
+# 만족하지 않는 경우 Pod는 해당 노드에 배치되지 않습니다. 이 규칙을 사용하면 특정 노드 또는 노드 집합에 Pod를 강제로 배치할 수 있습니다.
