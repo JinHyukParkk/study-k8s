@@ -3,8 +3,17 @@ kind: Service
 metadata:
   name: svc-1
 spec:
+  type: ClusterIP
+  clusterIP: 10.9.0.1
   selector:
     app: pod
   ports:
   - port: 9000
     targetPort: 8080
+
+
+# Service의 default type은 ClusterIP이다.
+# selector의 label과 동일한 파드들의 그룹으로 묶여 단일 진입점(virtual IP)을 제공한다.
+# 클러스터 내부에서만 사용 가능하다.
+# type 생략 시 default 값으로 10.96.0.0/12 범위에서 할당된다.
+# deployment로 replicaSet 개수를 변경하면 service의 endpoint도 변경된다.
