@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-nodeSelector
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14
+  nodeSelector:
+    disk: ssd
+    gpu: "true" 
+ 
