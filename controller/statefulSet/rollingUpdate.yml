@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rolling-update
+spec:
+  serviceName: "rolling-update"
+  updateStrategy:
+    type: RollingUpdate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rolling-update
+  template:
+    metadata:
+      labels:
+        app: rolling-update
+    spec:
+      containers:
+      - name: rolling-update
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
