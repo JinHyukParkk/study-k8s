@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: myweb
+spec:
+  replicas: 3
+  serviceName: myweb-svc
+  selector:
+    matchLabels:
+      app: web
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: web
+        env: dev
+    spec:
+      containers:
+        - name: myweb
+          image: nginx:1.7.9
+          ports:
+            - containerPort: 8080
+              protocol: TCP
