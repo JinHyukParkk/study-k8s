@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web2
+  labels:
+    app: web2
+spec:
+  selector:
+    matchLabels:
+      app: web2
+    template:
+      metadata:
+        labels:
+          app: web2
+      spec:
+        containers:
+        - name: web2
+          image: kubetm/web2
+          env:
+          - name: VERSION
+            value: "v2"
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config
+            readOnly: true
+        volumes:
+          - name: config-volume
+            configMap:
+              name: web2-config
+            secret:
+              secretName: web2-secret
+          

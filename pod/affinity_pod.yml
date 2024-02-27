@@ -14,3 +14,4 @@ spec:
  - name: container
    image: kubetm/app
  terminationGracePeriodSeconds: 0
+ 
